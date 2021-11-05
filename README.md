@@ -1,0 +1,1 @@
+# Kalite-Takip-Y-netim-Sistemi
