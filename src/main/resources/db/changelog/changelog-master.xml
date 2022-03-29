@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+
+    <changeSet id="1" author="fatih">
+
+        <createTable tableName="user">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="username" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(30)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+    <changeSet id="28.03.2022" author="Fatih">
+
+        <createTable tableName="user_m">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="username" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(30)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="title" type="varchar(30)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="cellphone" type="varchar(15)">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+    <changeSet id="20565645" author="Fatih">
+        <createTable tableName="activity">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="place" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datetime" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organizator" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="activetouser">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="activity_ids" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="user_ids" type="int">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+
+        <createTable tableName="activityevaluation">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="activities_id" type="tinyint">
+                <constraints nullable="false" />
+            </column>
+            <column name="users_id" type="tinyint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="evaluation" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="company">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="company_name" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="company_phone" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="domain_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mersis_no" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sgk_company_no" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id_from_career" type="tinyint">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+
+        <createTable tableName="branch">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="branch_name" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="branch_upper" type="varchar(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="rules" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="vacation_dates" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="company_id" type="tinyint">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+    <changeSet id="54556456" author="fatih">
+    <createTable
+                 tableName="userdetails">
+        <column name="id" type="tinyint">
+            <constraints primaryKey="true"/>
+        </column>
+        <column name="tc_no" type="varchar(11)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="dateofbirth" type="varchar(15)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="maritalstatus" type="varchar(20)">
+            <constraints nullable="true" />
+        </column>
+        <column name="numberofkids" type="tinyint">
+            <constraints nullable="true"/>
+        </column>
+        <column name="degree_of_disability" type="varchar(20)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="gender" type="varchar(10)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="education_status" type="varchar(25)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="highest_education_level_completed" type="varchar(30)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="last_completed_education_status" type="varchar(30)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="employment_type" type="varchar(20)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="military_service_status" type="varchar(25)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="date_of_start" type="varchar(20)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="contract_type" type="varchar(20)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="contract_end_date" type="varchar(25)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="work_email" type="varchar(25)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="address"  type="varchar(60)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="blood_type" type="varchar(50)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="home_telephone" type="varchar(20)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="work_phone" type="varchar(20)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="country" type="varchar(20)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="city" type="varchar(20)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="zip_code" type="varchar(10)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="address_district" type="varchar(30)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="bank_name" type="varchar(25)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="bank_account_type" type="varchar(20)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="bank_account_number" type="varchar(30)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="iban" type="varchar(25)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="emergency_contact" type="varchar(25)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="relationship_emergency_contact" type="varchar(25)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="emergency_contact_phone" type="varchar(25)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="quit_date" type="varchar(30)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="quit_reason_type" type="varchar(25)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="quit_explanation" type="varchar(25)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="user_id" type="tinyint">
+            <constraints nullable="true"/>
+        </column>
+    </createTable>
+    </changeSet>
+
+    <changeSet  author="Fatih"  id="237863306L">
+
+        <createTable tableName="payments">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="salary" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="currency" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salary_type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_scheme" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="commute_support_fee" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="food_support_fee" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="tinyint">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet  author="Fatih"  id="256456">
+
+        <createTable tableName="career">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="admin_tc_no" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="admin_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit_company" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit_branch" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit_department" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit_title" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_detail_id" type="tinyint">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+    <changeSet  author="Fatih"  id="2256L">
+        <addForeignKeyConstraint  baseColumnNames="activities_id"
+                                  baseTableName="activityevaluation"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_activity_evl_id"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="CASCADE"
+                                  referencedColumnNames="id"
+                                  referencedTableName="activity"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="users_id"
+                                  baseTableName="activityevaluation"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_users_evl_id"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="CASCADE"
+                                  referencedColumnNames="id"
+                                  referencedTableName="user"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+
+    </changeSet>
+<!--    <changeSet  author="Fatih"  id="26LOFUNd">-->
+<!--        <addForeignKeyConstraint  baseColumnNames="tc_no"-->
+<!--                                  baseTableName="userdetails"-->
+<!--                                  baseTableSchemaName="public"-->
+<!--                                  constraintName="fk_tc_no_user_payments"-->
+<!--                                  onDelete="CASCADE"-->
+<!--                                  deferrable="true"-->
+<!--                                  onUpdate="CASCADE"-->
+<!--                                  referencedColumnNames="id"-->
+<!--                                  referencedTableName="user"-->
+<!--                                  referencedTableSchemaName="public"-->
+<!--                                  validate="true"/>-->
+
+<!--    </changeSet>-->
+
+    <changeSet  author="Fatih"  id="5568HL">
+        <createTable tableName="department">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="department_name" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="branch_id" type="tinyint">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="title">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="title_name" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="department_id" type="tinyint">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+   <changeSet id="2255lpl" author="fatih">
+       <createTable tableName="usercareer">
+           <column name="id" type="tinyint">
+               <constraints primaryKey="true"></constraints>
+           </column>
+           <column name="company_id" type="tinyint">
+               <constraints nullable="true" ></constraints>
+           </column>
+           <column name="career_id" type="tinyint">
+               <constraints nullable="true"></constraints>
+           </column>
+       </createTable>
+   </changeSet>
+
+    <changeSet id="2255l323pl" author="fatih">
+        <createTable tableName="roles">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"></constraints>
+            </column>
+            <column name="name" type="varchar(150)">
+                <constraints nullable="true" ></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+<!--    INSERT INTO roles(name) VALUES('ROLE_USER');-->
+<!--    INSERT INTO roles(name) VALUES('ROLE_MODERATOR');-->
+<!--    INSERT INTO roles(name) VALUES('ROLE_ADMIN');-->
+    <changeSet author="fatih" id="service-1.2.1-2019-01-09-01">
+        <createSequence sequenceName="runtime_name_seq" dataType="bigint" incrementBy="1" maxValue="10000" minValue="1" startValue="1"/>
+    </changeSet>
+    <changeSet author="fatih" id="service-1.1-2019-01-09-01">
+
+        <insert tableName="roles">
+            <column name="id" valueSequenceNext="runtime_name_seq"/>
+            <column name="name" value="ROLE_USER"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="id" valueSequenceNext="runtime_name_seq"/>
+            <column name="name" value="ROLE_MODERATOR"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="id" valueSequenceNext="runtime_name_seq"/>
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
+    </changeSet>
+    <changeSet author="fatih" id="service-1.1-2022-03-18">
+        <createTable tableName="vacation_request">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"></constraints>
+            </column>
+            <column name="sicil_no" type="varchar(150)">
+                <constraints nullable="true" ></constraints>
+            </column>
+            <column name="start_date" type="varchar(150)">
+                <constraints nullable="true" ></constraints>
+            </column>
+            <column name="work_start_date" type="varchar(150)">
+                <constraints nullable="true" ></constraints>
+            </column>
+            <column name="vacation_request_status" type="varchar(150)">
+                <constraints nullable="true" ></constraints>
+            </column>
+            <column name="vacation_type" type="varchar(150)">
+                <constraints nullable="true" ></constraints>
+            </column>
+            <column name="permission_save_id" type="bigint">
+                <constraints nullable="true" ></constraints>
+            </column>
+            <column name="recognizant" type="varchar(50)">
+                <constraints nullable="true" ></constraints>
+            </column>
+            <column name="earned_vacation_days" type="bigint">
+                <constraints nullable="true"></constraints>
+            </column>
+            <column name="user_detail_id" type="bigint">
+                <constraints nullable="true"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="fatih" id="service-1.1-2022-03-23-vacation">
+        <createTable tableName="vacation_accrual">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"></constraints>
+            </column>
+            <column name="sicil_no" type="varchar(150)">
+                <constraints nullable="true" ></constraints>
+            </column>
+            <column name="permission_code" type="varchar(150)">
+                <constraints nullable="true" ></constraints>
+            </column>
+            <column name="number_of_vacation_days" type="bigint">
+                <constraints nullable="true" ></constraints>
+            </column>
+            <column name="accrual_date" type="varchar(150)">
+                <constraints nullable="true" ></constraints>
+            </column>
+            <column name="end_of_vacation_day" type="date">
+                <constraints nullable="true" ></constraints>
+            </column>
+
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
