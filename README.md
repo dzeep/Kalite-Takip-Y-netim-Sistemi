@@ -1,1 +1,1 @@
-# Kalite-Takip-Y-netim-Sistemi
+# Kalite Takip Yönetim Sistemi
