@@ -1,5 +1,6 @@
 package com.mergen.vtys.vtysdatabaseap.Controller;
 
+import com.mergen.vtys.vtysdatabaseap.Dto.CareerDto;
 import com.mergen.vtys.vtysdatabaseap.Model.Career;
 import com.mergen.vtys.vtysdatabaseap.Model.UserDetails;
 import com.mergen.vtys.vtysdatabaseap.Repository.UserDetailsRepository;
@@ -29,32 +30,31 @@ public class CareerController {
     private final CareerService careerService;
 
     @GetMapping(value = "/list")
-    public ResponseEntity<List<Career>> getCareersList(){
-        List<Career> careerList = careerService.getCareerList();
-        log.info("All Careers Returned - {}",careerList);
-        return ResponseEntity.ok(careerList);
+    public ResponseEntity<List<CareerDto>> getCareersList(){
+        List<CareerDto> careerDtoList = careerService.getCareerList();
+        log.info("All Careers Returned - {}",careerDtoList);
+        return ResponseEntity.ok(careerDtoList);
     }
 
-
-        @GetMapping(value = "list/{id}")
-    public ResponseEntity<Optional<Career>> getCareersById(@PathVariable Long id){
-        Optional<Career> status = careerService.getCareerById(id);
+    @GetMapping(value = "list/{id}")
+    public ResponseEntity<CareerDto> getCareersById(@PathVariable Long id){
+        CareerDto status = careerService.getCareerById(id);
         log.info("Career Got by Name Status - {}",status);
         return  ResponseEntity.ok(status);
     }
 
     @PostMapping(value = "/new")
-    public ResponseEntity<Career> createCareer(@RequestBody Career career) throws ParseException {
-        Career status = careerService.Create(career);
+    public ResponseEntity<CareerDto> createCareer(@RequestBody CareerDto careerDto) throws ParseException {
+        CareerDto status = careerService.Create(careerDto);
         log.info("Career Added Status - {}",status);
         return ResponseEntity.status(HttpStatus.CREATED).body(status);
     }
 
     @PutMapping(value = "update/{id}")
-    public ResponseEntity<String> updateCareer(@PathVariable Long id, @RequestBody Career career) {
-        String status = careerService.Update(id, career);
+    public ResponseEntity<String> updateCareer(@PathVariable Long id, @RequestBody CareerDto careerDto) {
+        String status = careerService.Update(id, careerDto);
         log.info("Career Updated Status - {}",status);
-        return ResponseEntity.ok(career.getAdmin_name() + " updated!");
+        return ResponseEntity.ok(careerDto.getAdmin_name() + " updated!");
     }
 
     @DeleteMapping(value = "remove/{id}")

@@ -1,5 +1,6 @@
 package com.mergen.vtys.vtysdatabaseap.Controller;
 
+import com.mergen.vtys.vtysdatabaseap.Dto.VacationRequestDto;
 import com.mergen.vtys.vtysdatabaseap.Model.Payments;
 import com.mergen.vtys.vtysdatabaseap.Model.VacationRequest;
 import com.mergen.vtys.vtysdatabaseap.Service.VacationRequestService;
@@ -26,25 +27,31 @@ public class VacationRequestController {
         this.vacationRequestService = vacationRequestService;
     }
     @GetMapping(value = "list")
-    public ResponseEntity<List<VacationRequest>> getVacationRequestList(){
-        List<VacationRequest> vacationRequests = vacationRequestService.getVacationRequestList();
-        log.info("All Payments Returned - {}",vacationRequests);
-        return ResponseEntity.ok(vacationRequests);
+    public ResponseEntity<List<VacationRequestDto>> getVacationRequestList(){
+        List<VacationRequestDto> vacationRequestDtoList = vacationRequestService.getVacationRequestList();
+        log.info("All Payments Returned - {}",vacationRequestDtoList);
+        return ResponseEntity.ok(vacationRequestDtoList);
     }
 
     @GetMapping("list/{id}")
-    public ResponseEntity<Optional<VacationRequest>> getVacationRequestById(@PathVariable Long id) {
-        Optional<VacationRequest> status = vacationRequestService.getVacationRequestById(id);
+    public ResponseEntity<VacationRequestDto> getVacationRequestById(@PathVariable Long id) {
+        VacationRequestDto status = vacationRequestService.getVacationRequestById(id);
         log.info("Payments Got by ID Status - {}",status);
         return ResponseEntity.ok(status);
     }
 
     @PostMapping(value = "new")
-    public ResponseEntity<VacationRequest> createVacationRequest(@RequestBody VacationRequest vacationRequest) throws ParseException {
+    public ResponseEntity<VacationRequestDto> createVacationRequest(@RequestBody VacationRequestDto vacationRequestDto) throws ParseException {
+        VacationRequestDto status = vacationRequestService.Create(vacationRequestDto);
+        log.info("Vacation Request SAVED Status - {}",status);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(vacationRequestDto);
+    }
 
-        VacationRequest status2 = vacationRequestService.Create(vacationRequest);
-        log.info("Vacation Request SAVED Status - {}",status2);
-        return  ResponseEntity.status(HttpStatus.CREATED).body(vacationRequest);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateVacationRequest(@PathVariable Long id,@RequestBody VacationRequestDto vacationRequestDto){
+        String status =vacationRequestService.Update(id,vacationRequestDto);
+        log.info("Vacation Request Updated - {}",status);
+        return  ResponseEntity.ok(id + "th Vacation Request Updated");
     }
 
     @DeleteMapping("remove/{id}")
@@ -53,12 +60,7 @@ public class VacationRequestController {
         log.info("Vacation Request Deleted Status - {}",status);
         return ResponseEntity.ok(id + "th Payments Deleted");
     }
-    @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateVacationRequest(@PathVariable Long id,@RequestBody VacationRequest vacationRequest){
-        String status =vacationRequestService.Update(id,vacationRequest);
-        log.info("Vacation Request Updated - {}",status);
-        return  ResponseEntity.ok(id + "th Vacation Request Updated");
-    }
+
 
 
 }

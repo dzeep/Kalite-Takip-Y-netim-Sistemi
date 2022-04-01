@@ -1,5 +1,6 @@
 package com.mergen.vtys.vtysdatabaseap.Controller;
 
+import com.mergen.vtys.vtysdatabaseap.Dto.VacationAccrualDto;
 import com.mergen.vtys.vtysdatabaseap.Model.Payments;
 import com.mergen.vtys.vtysdatabaseap.Model.VacationAccrual;
 
@@ -24,31 +25,38 @@ import java.util.Optional;
 @Slf4j
 public class VacationAccrualController {
 
-
     private VacationAccrualService vacationAccrualService;
     @Autowired
     public VacationAccrualController(VacationAccrualService vacationAccrualService) {
         this.vacationAccrualService = vacationAccrualService;
     }
+
     @GetMapping(value = "list")
-    public ResponseEntity<List<VacationAccrual>> getVacationAccrualList(){
-        List<VacationAccrual> vacationAccruals = vacationAccrualService.getVacationAccrualList();
+    public ResponseEntity<List<VacationAccrualDto>> getVacationAccrualList(){
+        List<VacationAccrualDto> vacationAccruals = vacationAccrualService.getVacationAccrualList();
         log.info("All VacationAccruals Returned - {}",vacationAccruals);
         return ResponseEntity.ok(vacationAccruals);
     }
 
     @GetMapping("list/{id}")
-    public ResponseEntity<Optional<VacationAccrual>> getVacationAccrualById(@PathVariable Long id){
-        Optional<VacationAccrual> status = vacationAccrualService.getVacationAccrualById(id);
+    public ResponseEntity<VacationAccrualDto> getVacationAccrualById(@PathVariable Long id){
+        VacationAccrualDto status = vacationAccrualService.getVacationAccrualById(id);
         log.info("VacationAccrual Got by ID Status - {}",status);
         return ResponseEntity.ok(status);
     }
 
     @PostMapping(value = "new")
-    public ResponseEntity<VacationAccrual> createVacationAccrual(@RequestBody VacationAccrual vacationAccrual) throws ParseException {
-        VacationAccrual status = vacationAccrualService.Create(vacationAccrual);
+    public ResponseEntity<VacationAccrualDto> createVacationAccrual(@RequestBody VacationAccrualDto vacationAccrualDto) throws ParseException {
+        VacationAccrualDto status = vacationAccrualService.Create(vacationAccrualDto);
         log.info("VacationAccrual Added Status - {}",status);
-        return  ResponseEntity.status(HttpStatus.CREATED).body(vacationAccrual);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(vacationAccrualDto);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateVacationAccrual(@PathVariable Long id,@RequestBody VacationAccrualDto vacationAccrualDto){
+        String status = vacationAccrualService.Update(id,vacationAccrualDto);
+        log.info("Vacation Accrual Updated - {}",status);
+        return  ResponseEntity.ok(id + "th Vacation Accrual Updated");
     }
 
     @DeleteMapping("remove/{id}")
@@ -57,12 +65,7 @@ public class VacationAccrualController {
         log.info("VacationAccrual Deleted Status - {}",status);
         return ResponseEntity.ok(id + "th Vacation Accrual Deleted");
     }
-    @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateVacationAccrual(@PathVariable Long id,@RequestBody VacationAccrual vacationAccrual){
-        String status = vacationAccrualService.Update(id,vacationAccrual);
-        log.info("Vacation Accrual Updated - {}",status);
-        return  ResponseEntity.ok(id + "th Vacation Accrual Updated");
-    }
+
 
 }
 

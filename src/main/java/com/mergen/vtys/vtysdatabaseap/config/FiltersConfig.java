@@ -15,13 +15,16 @@ public class FiltersConfig {
         registrationBean.setFilter(requestResponseLoggers);
 
         registrationBean.addUrlPatterns(  // Yazılan path'lere göre logging yapılmasını sağlar.
-                "/user/users", "/user/users/*", "/user/*", "/user/*/*", "/user/post", "/user/put/*","/user/delete/*",
-                "/company/companies", "/company/companies/*", "/company/post", "/company/put/*", "/company/delete/*",
-                "/branch/branches", "/branch/branches/*", "/branch/post", "/branch/put/*", "/branch/delete/*",
-                "/activityevaluation/evaluations", "/activityevaluation/evaluations/*", "/activityevaluation/post", "/activityevaluation/put/*", "/activityevaluation/delete/*",
-                "/activity/activities", "/activity/activities/*", "/activity/post", "/activity/put/*", "/activity/delete/*",
-                "/activetouser/activetousers", "/activetouser/activetousers/*","/activetouser/user/*","/activetouser/activity/enrolled/*","/activetouser/post","/activetouser/put/*","/activetouser/delete/*,",
-                "/userdetail/userdetails", "/userdetail/userdetails/*", "/userdetail/post", "/userdetail/update/*", "/userdetail/delete/*"
+                "/user/users", "/user/users/*", "/user/*", "/user/*/*", "/user/new", "/user/update/*","/user/remove/*",
+                "/company/companies", "/company/companies/*", "/company/new", "/company/update/*", "/company/remove/*",
+                "/branch/branches", "/branch/branches/*", "/branch/new", "/branch/update/*", "/branch/remove/*",
+                "/activityevaluation/evaluations", "/activityevaluation/evaluations/*", "/activityevaluation/new", "/activityevaluation/update/*", "/activityevaluation/remove/*",
+                "/activity/activities", "/activity/activities/*", "/activity/new", "/activity/update/*", "/activity/remove/*",
+                "/activetouser/activetousers", "/activetouser/activetousers/*","/activetouser/user/*","/activetouser/activity/enrolled/*","/activetouser/new","/activetouser/update/*","/activetouser/remove/*,",
+                "/userdetail/userdetails", "/userdetail/userdetails/*", "/userdetail/new", "/userdetail/update/*", "/userdetail/remove/*" ,
+                "/department/find/branch:*"
+
+
         );
         return registrationBean;
     }
