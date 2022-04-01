@@ -1,11 +1,15 @@
 package com.mergen.vtys.vtysdatabaseap.Service.Impl;
 
+import com.mergen.vtys.vtysdatabaseap.Dto.BranchDto;
+import com.mergen.vtys.vtysdatabaseap.Dto.PaymentsDto;
 import com.mergen.vtys.vtysdatabaseap.Model.Branch;
+import com.mergen.vtys.vtysdatabaseap.Model.Payments;
 import com.mergen.vtys.vtysdatabaseap.Model.User;
 import com.mergen.vtys.vtysdatabaseap.Repository.BranchRepository;
 import com.mergen.vtys.vtysdatabaseap.Service.BranchService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Data
@@ -20,36 +25,46 @@ import java.util.Optional;
 public class BranchServiceImpl implements BranchService {
 
     private final BranchRepository branchRepository;
+    private final ModelMapper modelMapper;
 
     @Override
-    public List<Branch> getBranchList() {
-        return (List<Branch>) branchRepository.findAll();
+    public List<BranchDto> getBranchList() {
+        List<Branch> branchList = (List<Branch>) branchRepository.findAll();
+        return branchList.stream().map(branch -> modelMapper.map(branch, BranchDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Branch> getBranchById(Long id) {
+    public BranchDto getBranchById(Long id) {
         Optional<Branch> branch = branchRepository.findById(id);
-        if (branch.isPresent()) {
-            return branch;
-        }
-        throw new IllegalArgumentException(id + " Not Found!");
+        if (branch.isPresent())
+            return modelMapper.map(branch.get(),BranchDto.class);
+        throw new IllegalArgumentException("ID:" + id + " Fail" + " And Get Payments by ID Fail!");
     }
 
     @Override
-    public Branch Create(Branch model) {
-        branchRepository.save(model);
-        return model;
+    public List<BranchDto> FindByCompanyid(@Param("company_id") Long company_id) {
+        List<Branch> branchList = (List<Branch>) branchRepository.FindByCompanyID(company_id);
+        return branchList.stream().map(branch -> modelMapper.map(branch, BranchDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public String Update(Long id, Branch model) {
+    public BranchDto Create(BranchDto model) {
+        Branch branch = modelMapper.map(model,Branch.class);
+        Optional<Branch> _branch = branchRepository.findById(model.getId());
+        if(_branch.isEmpty())
+            return modelMapper.map(branchRepository.save(branch),BranchDto.class);
+        throw new IllegalArgumentException(model + " Create Option Fail!");
+    }
+
+    @Override
+    public String Update(Long id, BranchDto model) {
+        Branch branch = modelMapper.map(model,Branch.class);
         Optional<Branch> _branch = branchRepository.findById(id);
         if(_branch.isPresent()){
-            branchRepository.save(model);
-            return model.getBranch_name();
-        }
-        else
-        throw  new IllegalArgumentException(model + " Update Option Fail!");
+            if(id.equals(model.getId())) {
+                branchRepository.save(branch);
+                return "ID:" + branch.getId() + " Updated!";}}
+        throw new IllegalArgumentException(model + " Update Option Fail!");
     }
 
     @Override
@@ -60,14 +75,6 @@ public class BranchServiceImpl implements BranchService {
             return id.toString();}
         else
         throw new IllegalArgumentException(" Delete Option Fail!");
-    }
-    @Override
-    public List<Branch> FindByCompanyid(@Param("company_id") Long company_id) {
-        try {
-            return branchRepository.FindByCompanyid(company_id);
-        } catch (Exception e) {
-            throw new IllegalArgumentException(" Internal Server Error!");
-        }
     }
 
 }

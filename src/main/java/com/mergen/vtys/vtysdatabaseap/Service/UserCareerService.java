@@ -1,11 +1,10 @@
 package com.mergen.vtys.vtysdatabaseap.Service;
 
-import com.mergen.vtys.vtysdatabaseap.Model.Title;
-import com.mergen.vtys.vtysdatabaseap.Model.UserCareer;
-import java.util.List;
-import java.util.Optional;
+import com.mergen.vtys.vtysdatabaseap.Dto.UserCareerDto;
 
-public interface UserCareerService extends HelperService<UserCareer> {
-    List<UserCareer> getUserCareerList();
-    Optional<UserCareer> getUserCareerByID(Long id);
+import java.util.List;
+
+public interface UserCareerService extends HelperService<UserCareerDto> {
+    List<UserCareerDto> getUserCareerList();
+    UserCareerDto getUserCareerByID(Long id);
 }

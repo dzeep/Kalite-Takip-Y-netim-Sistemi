@@ -1,6 +1,7 @@
 package com.mergen.vtys.vtysdatabaseap.Controller;
 
 
+import com.mergen.vtys.vtysdatabaseap.Dto.BranchDto;
 import com.mergen.vtys.vtysdatabaseap.Model.Branch;
 import com.mergen.vtys.vtysdatabaseap.Model.User;
 import com.mergen.vtys.vtysdatabaseap.Model.UserDetails;
@@ -26,37 +27,43 @@ public class BranchController {
 
     private BranchService branchService;
 
-
     public BranchController(BranchService branchService) {
         this.branchService = branchService;
     }
 
     @GetMapping(value = "list")
-    public ResponseEntity<List<Branch>> getBranchList() {
-        List<Branch> branchList = branchService.getBranchList();
+    public ResponseEntity<List<BranchDto>> getBranchList() {
+        List<BranchDto> branchList = branchService.getBranchList();
         log.info("All Branches Returned - {}",branchList);
         return ResponseEntity.ok(branchList);
     }
 
     @GetMapping(value = "list/{id}")
-    public ResponseEntity<Optional<Branch>> getBranchById(@PathVariable Long id) {
-        Optional<Branch> status = branchService.getBranchById(id);
+    public ResponseEntity<BranchDto> getBranchById(@PathVariable Long id) {
+        BranchDto status = branchService.getBranchById(id);
         log.info("Branch Got by ID Status - {}",status);
         return ResponseEntity.ok(status);
     }
 
+    @GetMapping(value = "/find/company:{company_id}")
+    public ResponseEntity<List<BranchDto>> FindbyCompanyid(@PathVariable() Long company_id) {
+        List<BranchDto> status = branchService.FindByCompanyid(company_id);
+        log.info("Branch Got by Company_id Status - {}", status);
+        return ResponseEntity.ok(status);
+    }
+
     @PostMapping(value = "new")
-    public ResponseEntity<Branch> createBranch(@RequestBody Branch branch) throws ParseException {
-        Branch status = branchService.Create(branch);
+    public ResponseEntity<BranchDto> createBranch(@RequestBody BranchDto branchDto) throws ParseException {
+        BranchDto status = branchService.Create(branchDto);
         log.info("Branch Added Status - {}",status);
-        return  ResponseEntity.status(HttpStatus.CREATED).body(branch);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(branchDto);
     }
 
     @PutMapping(value = "update/{id}")
-    public ResponseEntity<String> updateBranch(@PathVariable Long id, @RequestBody Branch branch) {
-        String status = branchService.Update(id,branch);
+    public ResponseEntity<String> updateBranch(@PathVariable Long id, @RequestBody BranchDto branchDto) {
+        String status = branchService.Update(id,branchDto);
         log.info("Branch Updated Status - {}",status);
-        return ResponseEntity.ok(branch.getBranch_name() + " updated!");
+        return ResponseEntity.ok(branchDto.getBranch_name() + " updated!");
     }
 
     @DeleteMapping(value = "remove/{id}")
@@ -65,14 +72,6 @@ public class BranchController {
         log.info("Branch Deleted Status - {}",status);
         return ResponseEntity.ok(id + "th Branch deleted!");
     }
-
-    @GetMapping(value = "/find/company:{company_id}")
-    public ResponseEntity<List<Branch>> FindbyCompanyid(@PathVariable() Long company_id) {
-        List<Branch> status = branchService.FindByCompanyid(company_id);
-        log.info("Branch Got by Company_id Status - {}", status);
-        return ResponseEntity.ok(status);
-    }
-
 
 }
 

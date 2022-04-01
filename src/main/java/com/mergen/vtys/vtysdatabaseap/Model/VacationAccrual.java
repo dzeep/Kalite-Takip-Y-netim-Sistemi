@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @Entity
@@ -24,7 +23,6 @@ public class VacationAccrual {
     private Long number_of_vacation_days;
     @Column
     private LocalDateTime accrual_date;
-    @Column
-    private Date end_of_vacation_day;
+
 }
 

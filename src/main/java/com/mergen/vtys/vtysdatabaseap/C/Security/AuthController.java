@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.mergen.vtys.vtysdatabaseap.C.Security.Load_pay.Request.LogOutRequest;
@@ -26,7 +24,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -150,35 +147,15 @@ public class AuthController {
                         "Refresh token is not in database!"));
     }
 
-
     @PostMapping("/logout")
     public ResponseEntity<?> logoutUser(@Valid @RequestBody LogOutRequest logOutRequest) {
 
 
         refreshTokenService.deleteByUserId(logOutRequest.getUserId());
-
         return ResponseEntity.ok(new MessageResponse("Log out successful!"));
     }
 
 }
-
-    /*    @PostMapping("/logout")
-        public ResponseEntity<?> logoutUser(HttpServletRequest request, HttpServletResponse response) {
-            {
-
-                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                if (authentication != null)
-                    new SecurityContextLogoutHandler().logout(request, response, authentication);
-
-                // return "redirect:/login";
-//        refreshTokenService.deleteByUserId(logOutRequest.getUserId());
-                return ResponseEntity.ok(new MessageResponse("Log out successful!"));
-            }
-        }*/
-
-
-
-
 
 
     

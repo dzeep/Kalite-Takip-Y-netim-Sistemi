@@ -47,7 +47,7 @@ public class Career {
         private List<Company> companies=new ArrayList<>();
 */
        @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-       @JoinTable(name ="usercareer", joinColumns = @JoinColumn(name = "company_id", referencedColumnName = "id", nullable = true),
-               inverseJoinColumns = @JoinColumn(name = "career_id", referencedColumnName = "id", nullable = true))
+       @JoinTable(name ="usercareer", joinColumns = @JoinColumn(name = "company_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "career_id", referencedColumnName = "id"))
        private List<Company> companies = new ArrayList<>();
 }

@@ -31,7 +31,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
                 <constraints primaryKey="true"/>
             </column>
             <column name="username" type="varchar(150)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="email" type="varchar(30)">
                 <constraints nullable="true"/>
@@ -96,19 +96,19 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
                 <constraints primaryKey="true"/>
             </column>
             <column name="company_name" type="varchar(50)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="company_phone" type="varchar(20)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="domain_name" type="varchar(50)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="mersis_no" type="varchar(30)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="sgk_company_no" type="varchar(50)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="company_id_from_career" type="tinyint">
                 <constraints nullable="true"/>
@@ -256,22 +256,22 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
                 <constraints primaryKey="true"/>
             </column>
             <column name="salary" type="varchar(50)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="currency" type="varchar(20)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="salary_type" type="varchar(50)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="payment_scheme" type="varchar(50)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="commute_support_fee" type="varchar(50)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="food_support_fee" type="varchar(50)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="user_id" type="tinyint">
                 <constraints nullable="true"/>
@@ -382,13 +382,13 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
    <changeSet id="2255lpl" author="fatih">
        <createTable tableName="usercareer">
            <column name="id" type="tinyint">
-               <constraints primaryKey="true"></constraints>
+               <constraints primaryKey="true"/>
            </column>
            <column name="company_id" type="tinyint">
-               <constraints nullable="true" ></constraints>
+               <constraints nullable="true"/>
            </column>
            <column name="career_id" type="tinyint">
-               <constraints nullable="true"></constraints>
+               <constraints nullable="true"/>
            </column>
        </createTable>
    </changeSet>
@@ -450,7 +450,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
             <column name="recognizant" type="varchar(50)">
                 <constraints nullable="true" ></constraints>
             </column>
-            <column name="earned_vacation_days" type="bigint">
+            <column name="working_day_number" type="bigint">
                 <constraints nullable="true"></constraints>
             </column>
             <column name="user_detail_id" type="bigint">
@@ -466,7 +466,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
             <column name="sicil_no" type="varchar(150)">
                 <constraints nullable="true" ></constraints>
             </column>
-            <column name="permission_code" type="varchar(150)">
+            <column name="permisiion_code" type="varchar(150)">
                 <constraints nullable="true" ></constraints>
             </column>
             <column name="number_of_vacation_days" type="bigint">
@@ -475,10 +475,6 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
             <column name="accrual_date" type="varchar(150)">
                 <constraints nullable="true" ></constraints>
             </column>
-            <column name="end_of_vacation_day" type="date">
-                <constraints nullable="true" ></constraints>
-            </column>
-
         </createTable>
     </changeSet>
 </databaseChangeLog>

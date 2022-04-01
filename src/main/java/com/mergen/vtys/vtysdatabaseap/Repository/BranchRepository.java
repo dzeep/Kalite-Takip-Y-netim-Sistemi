@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface BranchRepository extends CrudRepository<Branch, Long> {
     @Query(value = "select * from public.branch u Where u.company_id=?",nativeQuery = true)
-    List<Branch> FindByCompanyid(@Param("company_id") Long company_id);
+    List<Branch> FindByCompanyID(@Param("company_id") Long company_id);
 
 }
 

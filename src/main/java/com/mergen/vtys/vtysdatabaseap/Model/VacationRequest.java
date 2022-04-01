@@ -29,17 +29,13 @@ public class VacationRequest {
     @Column
     private String vacation_type;
     @Column
-    private Long permission_save_id;
+    private int permission_save_id;
     @Column
     private String recognizant;
     @Column
-    private Long earned_vacation_days;
+    private int working_day_number;
     @Column
     private Long user_detail_id;
-
-
-
-
 
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
 //    public void setVacation_request_status(String vacation_request_status) {

@@ -11,6 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface DepartmentRepository extends CrudRepository<Department,Long> {
-  @Query(value ="select * from public.department u Where u.branch_id=?",nativeQuery = true)
-  List<Optional<Department>> getBranchId(@Param("branch_id") Long branch_id);
+  @Query(value ="select * from public.department u Where u.branch_id=?1",nativeQuery = true)
+  List<Department> getBranchId(@Param("branch_id") Long branch_id);
 }
